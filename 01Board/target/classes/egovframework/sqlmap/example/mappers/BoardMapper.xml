@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="egovframework.example.main.mapper.BoardMapper">
+	<!-- 게시글 목록 보기 -->
+	<select id="selectAll" resultType="BoardVo">
+		SELECT * FROM board
+		ORDER BY BOARD_NO DESC
+	</select>
+	
+	<!-- 게시글 상세 보기 -->	
+	<select id="selectDetail" parameterType="Integer" resultType="BoardVo">
+		SELECT * FROM board
+		WHERE BOARD_NO = #{BOARD_NO}
+	</select>
+	
+	<!-- 게시글 작성 -->
+	<select id="insertBoard" parameterType="BoardVo">
+		INSERT INTO board(BOARD_TITLE, BOARD_CONTENTS)
+		VALUES (#{BOARD_TITLE}, #{BOARD_CONTENTS})
+	</select>
+	
+	<!-- 게시글 수정 -->
+	<select id="updateBoard" parameterType="BoardVo">
+		UPDATE board SET
+		BOARD_TITLE = #{BOARD_TITLE}, BOARD_CONTENTS = #{BOARD_CONTENTS}
+		WHERE BOARD_NO = #{BOARD_NO}
+	</select>
+	
+	<!-- 게시글 삭제 -->
+	<select id="deleteBoard" parameterType="Integer">
+		DELETE FROM board
+		WHERE BOARD_NO = #{BOARD_NO}
+	</select>
+</mapper>
